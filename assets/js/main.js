@@ -33,6 +33,13 @@ const nav = document.querySelector('nav');
 
 const updateNav = () => nav.classList.toggle('scrolled', window.scrollY > 20);
 
+// ── Scroll to top ─────────────────────────────────────────
+const scrollTopBtn = document.querySelector('.scroll-top');
+
+scrollTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
 // ── Nav: link activo según sección visible ────────────────
 const sections   = Array.from(document.querySelectorAll('section[id]'));
 const navAnchors = Array.from(document.querySelectorAll('.nav-links a[href^="#"]'));
@@ -72,6 +79,7 @@ window.addEventListener('scroll', () => {
     updateNav();
     updateProgress();
     updateActiveLink();
+    scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
 }, { passive: true });
 
 // Estado inicial
@@ -110,8 +118,10 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
         const sectionAbsTop  = section.getBoundingClientRect().top + window.scrollY;
         const sectionPadding = parseFloat(getComputedStyle(section).paddingTop) || 0;
 
-        // El label queda 32 px bajo el nav
-        const top = sectionAbsTop + sectionPadding - NAV_H - 32;
+        // Centra visualmente: posiciona el contenido al 38% del viewport
+        // pero nunca menos de nav + 40px para no quedar tapado por el nav
+        const desiredOffset = Math.max(NAV_H + 40, window.innerHeight * 0.38);
+        const top = sectionAbsTop + sectionPadding - desiredOffset;
 
         window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
     });
