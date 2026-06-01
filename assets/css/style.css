@@ -680,6 +680,7 @@ nav.scrolled {
         grid-template-columns: 1fr;
         text-align: center;
         gap: 2.5rem;
+        padding-top: 96px;
     }
 
     #hero .hero-content { order: 2; }
@@ -711,7 +712,7 @@ nav.scrolled {
 }
 
 @media (max-width: 480px) {
-    #hero { padding-top: 70px; }
+    #hero { padding-top: 96px; }
 }
 
 /* ── About ───────────────────────────────────────────────── */
