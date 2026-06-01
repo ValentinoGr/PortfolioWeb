@@ -87,23 +87,36 @@ updateNav();
 updateProgress();
 updateActiveLink();
 
-// ── Hamburger menu ────────────────────────────────────────
-const toggle   = document.querySelector('.nav-toggle');
-const navLinks = document.querySelector('.nav-links');
-const body     = document.body;
+// ── Mobile menu (panel derecho) ───────────────────────────
+const toggle      = document.querySelector('.nav-toggle');
+const mobileMenu  = document.querySelector('.mobile-menu');
+const overlay     = document.querySelector('.menu-overlay');
+const menuClose   = document.querySelector('.menu-close');
+const body        = document.body;
+
+const openMenu = () => {
+    toggle.classList.add('is-open');
+    mobileMenu.classList.add('is-open');
+    overlay.classList.add('is-open');
+    body.style.overflow = 'hidden';
+};
+
+const closeMenu = () => {
+    toggle.classList.remove('is-open');
+    mobileMenu.classList.remove('is-open');
+    overlay.classList.remove('is-open');
+    body.style.overflow = '';
+};
 
 toggle.addEventListener('click', () => {
-    const isOpen = toggle.classList.toggle('is-open');
-    navLinks.classList.toggle('is-open', isOpen);
-    body.style.overflow = isOpen ? 'hidden' : '';
+    mobileMenu.classList.contains('is-open') ? closeMenu() : openMenu();
 });
 
-navLinks.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => {
-        toggle.classList.remove('is-open');
-        navLinks.classList.remove('is-open');
-        body.style.overflow = '';
-    });
+menuClose.addEventListener('click', closeMenu);
+overlay.addEventListener('click', closeMenu);
+
+document.querySelectorAll('.mobile-menu-links a').forEach((link) => {
+    link.addEventListener('click', closeMenu);
 });
 
 // ── Smooth scroll ─────────────────────────────────────────
