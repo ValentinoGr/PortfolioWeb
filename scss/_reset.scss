@@ -1,0 +1,155 @@
+@use 'variables' as *;
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    background: $bg;
+    color: $text;
+    font-family: $font-sans;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+a {
+    color: inherit;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    background: none;
+    font: inherit;
+}
+
+// ── Utilidades de layout ──────────────────────────────────
+.container {
+    max-width: $section-max-width;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+section {
+    max-width: $section-max-width;
+    margin: 0 auto;
+    padding: $section-padding;
+}
+
+hr.divider {
+    border: none;
+    border-top: 1px solid $border;
+    max-width: $section-max-width;
+    margin: 0 auto;
+}
+
+// ── Encabezados de sección ────────────────────────────────
+.section-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: $accent;
+    margin-bottom: 0.5rem;
+}
+
+.section-title {
+    font-size: clamp(1.6rem, 3.5vw, 2rem);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    margin-bottom: 2.25rem;
+    line-height: 1.2;
+}
+
+// ── Botones ───────────────────────────────────────────────
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.7rem 1.5rem;
+    border-radius: $radius-sm;
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-decoration: none;
+    transition: background $transition-fast, border-color $transition-fast, transform $transition-fast, box-shadow $transition-fast;
+    white-space: nowrap;
+    cursor: pointer;
+    border: 1px solid transparent;
+
+    &-primary {
+        background: $accent;
+        color: #fff;
+
+        &:hover {
+            background: $accent-light;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.35);
+            transform: translateY(-1px);
+        }
+    }
+
+    &-ghost {
+        background: transparent;
+        border-color: $border;
+        color: $text;
+
+        &:hover {
+            background: $bg-hover;
+            border-color: $border-light;
+        }
+    }
+
+    &-outline {
+        background: transparent;
+        border-color: $accent-border;
+        color: $accent;
+
+        &:hover {
+            background: $accent-dim;
+        }
+    }
+}
+
+// ── Tags ──────────────────────────────────────────────────
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.tag {
+    background: $accent-dim;
+    color: $accent;
+    border: 1px solid $accent-border;
+    border-radius: $radius-pill;
+    padding: 0.2rem 0.7rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+}
+
+@media (max-width: 480px) {
+    section {
+        padding: 4rem 1.25rem;
+    }
+}

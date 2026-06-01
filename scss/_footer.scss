@@ -1,0 +1,32 @@
+@use 'variables' as *;
+
+footer {
+    border-top: 1px solid $border;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: $text-dim;
+    font-size: 0.82rem;
+
+    a {
+        color: $text-muted;
+        text-decoration: none;
+        transition: color $transition-fast;
+
+        &:hover { color: $text; }
+    }
+
+    .separator {
+        color: $border-light;
+    }
+}
+
+@media (max-width: $bp-sm) {
+    footer {
+        flex-direction: column;
+        gap: 0.25rem;
+        text-align: center;
+    }
+}

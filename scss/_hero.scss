@@ -1,0 +1,176 @@
+@use 'variables' as *;
+
+#hero {
+    min-height: 100dvh;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 4rem;
+    padding-top: 80px;
+
+    // Texto del lado izquierdo
+    .hero-content {
+        .badge {
+            display: inline-block;
+            background: $accent-dim;
+            color: $accent;
+            border: 1px solid $accent-border;
+            border-radius: $radius-pill;
+            padding: 0.3rem 1rem;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 1.75rem;
+
+            // Punto pulsante de disponibilidad
+            &::before {
+                content: '';
+                display: inline-block;
+                width: 6px;
+                height: 6px;
+                background: $accent;
+                border-radius: 50%;
+                margin-right: 0.5rem;
+                animation: pulse 2s infinite;
+            }
+        }
+
+        .hero-name {
+            font-size: clamp(2.4rem, 5.5vw, 4.5rem);
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 1.05;
+            margin-bottom: 1.25rem;
+
+            .accent { color: $accent; }
+        }
+
+        .hero-sub {
+            font-size: 1.1rem;
+            color: $text-muted;
+            max-width: 460px;
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        // Animaciones de entrada con stagger
+        .badge        { animation: fadeSlideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both; }
+        .hero-name    { animation: fadeSlideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both; }
+        .hero-sub     { animation: fadeSlideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both; }
+        .hero-actions { animation: fadeSlideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both; }
+    }
+
+    // Avatar del lado derecho
+    .hero-visual {
+        animation: scaleIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+
+        .hero-avatar {
+            width: 280px;
+            height: 280px;
+            border-radius: $radius-xl;
+            border: 1px solid $border;
+            background: $bg-card;
+            overflow: hidden;
+            position: relative;
+            cursor: default;
+            transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                        box-shadow 0.45s ease,
+                        border-color 0.45s ease;
+
+            &:hover {
+                transform: translateY(-10px) scale(1.03);
+                border-color: rgba(99, 102, 241, 0.5);
+                box-shadow: 0 30px 70px rgba(99, 102, 241, 0.22),
+                            0 0 0 1px rgba(99, 102, 241, 0.3),
+                            inset 0 0 80px rgba(99, 102, 241, 0.07);
+
+                &::after {
+                    color: $accent-light;
+                    text-shadow: 0 0 40px rgba(129, 140, 248, 0.5);
+                }
+            }
+
+            // Gradiente decorativo si no hay imagen
+            &::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), transparent 60%);
+            }
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: top;
+            }
+
+            // Placeholder si no hay imagen
+            &:not(:has(img)) {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 6rem;
+                color: $border-light;
+
+                &::after {
+                    content: 'VG';
+                    font-size: 4rem;
+                    font-weight: 800;
+                    color: $accent;
+                    letter-spacing: -0.05em;
+                    position: relative;
+                    z-index: 1;
+                }
+            }
+        }
+    }
+}
+
+// ── Pulsación del badge ───────────────────────────────────
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.5; transform: scale(0.85); }
+}
+
+// ── Responsive ────────────────────────────────────────────
+@media (max-width: $bp-md) {
+    #hero {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+        text-align: center;
+        gap: 2.5rem;
+
+        .hero-content {
+            order: 2;
+
+            .hero-sub { max-width: 100%; }
+
+            .hero-actions { justify-content: center; }
+        }
+
+        .hero-visual {
+            order: 1;
+            display: flex;
+            justify-content: center;
+
+            .hero-avatar {
+                width: 160px;
+                height: 160px;
+            }
+        }
+    }
+}
+
+@media (max-width: $bp-sm) {
+    #hero {
+        padding-top: 70px;
+    }
+}

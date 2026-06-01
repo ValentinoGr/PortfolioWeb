@@ -1,0 +1,17 @@
+// ── Entrada principal ─────────────────────────────────────
+// Compilar con: sass scss/style.scss assets/css/style.css --watch
+// (requiere: npm install -g sass)
+
+@use 'variables';
+@use 'reset';
+@use 'animations';
+@use 'nav';
+@use 'hero';
+@use 'about';
+@use 'experience';
+@use 'education';
+@use 'skills';
+@use 'languages';
+@use 'projects';
+@use 'contact';
+@use 'footer';

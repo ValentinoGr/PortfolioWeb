@@ -1,0 +1,75 @@
+@use 'variables' as *;
+
+#skills {
+    .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 1rem;
+    }
+
+    .skill-card {
+        background: $bg-card;
+        border: 1px solid $border;
+        border-radius: $radius-md;
+        padding: 1.5rem 1rem;
+        text-align: center;
+        transition: border-color $transition-base, transform $transition-base, background $transition-base;
+        cursor: default;
+
+        &:hover {
+            border-color: $accent;
+            background: $bg-hover;
+            transform: translateY(-4px);
+
+            .skill-icon { transform: scale(1.15); }
+        }
+
+        .skill-icon {
+            font-size: 2.25rem;
+            margin-bottom: 0.75rem;
+            display: block;
+            transition: transform $transition-base;
+        }
+
+        .skill-name {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .skill-level {
+            font-size: 0.7rem;
+            color: $text-dim;
+            font-weight: 500;
+        }
+
+        // Barra de nivel
+        .skill-bar {
+            margin-top: 0.75rem;
+            height: 3px;
+            background: $border;
+            border-radius: 2px;
+            overflow: hidden;
+
+            .skill-fill {
+                height: 100%;
+                background: $accent;
+                border-radius: 2px;
+                transform: scaleX(0);
+                transform-origin: left;
+                transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+        }
+
+        &.is-visible .skill-fill {
+            transform: scaleX(1);
+        }
+    }
+}
+
+// ── Responsive ────────────────────────────────────────────
+@media (max-width: $bp-sm) {
+    #skills .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

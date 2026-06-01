@@ -1,0 +1,55 @@
+@use 'variables' as *;
+
+#contact {
+    .contact-box {
+        background: $bg-card;
+        border: 1px solid $border;
+        border-radius: $radius-xl;
+        padding: 4rem 3rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+
+        // Gradiente decorativo de fondo
+        &::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 500px;
+            height: 250px;
+            background: radial-gradient(ellipse, rgba(99, 102, 241, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .contact-title {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-bottom: 1rem;
+        }
+
+        .contact-sub {
+            color: $text-muted;
+            font-size: 1rem;
+            max-width: 380px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.7;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+    }
+}
+
+// ── Responsive ────────────────────────────────────────────
+@media (max-width: $bp-sm) {
+    #contact .contact-box {
+        padding: 2.5rem 1.5rem;
+    }
+}
