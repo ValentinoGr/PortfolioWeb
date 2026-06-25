@@ -133,6 +133,8 @@ nav {
 @media (max-width: $bp-md) {
     nav { padding: 0 1.25rem; }
 
+    .nav-links { display: none; }
+
     .nav-cta { display: none; }
 
     .nav-toggle { display: flex; }
