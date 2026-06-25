@@ -1,14 +1,41 @@
 @use 'variables' as *;
 
 #about {
-    .about-grid {
+    .bento-grid {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 3.5rem;
-        align-items: start;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        grid-template-areas:
+            "bio bio s1"
+            "bio bio s2"
+            "s3  s4  s4";
     }
 
-    .about-text {
+    .bento-bio {
+        grid-area: bio;
+        background: $bg-card;
+        border: 1px solid $border;
+        border-radius: $radius-lg;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+        transition: border-color $transition-base;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, $accent, transparent 60%);
+        }
+
+        &:hover { border-color: $border-light; }
+
         p {
             color: $text-muted;
             font-size: 1.05rem;
@@ -23,47 +50,62 @@
         }
     }
 
-    .about-stats {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 1rem;
+    .bento-stat {
+        background: $bg-card;
+        border: 1px solid $border;
+        border-radius: $radius-lg;
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        gap: 0.2rem;
+        min-height: 110px;
+        transition: border-color $transition-base, transform $transition-base, background $transition-base;
 
-        .stat-card {
-            background: $bg-card;
-            border: 1px solid $border;
-            border-radius: $radius-md;
-            padding: 1.5rem;
-            transition: border-color $transition-base, transform $transition-base;
+        &:hover {
+            border-color: $accent;
+            background: $bg-hover;
+            transform: translateY(-3px);
+        }
 
-            &:hover {
-                border-color: $accent;
-                transform: translateY(-2px);
-            }
+        &:nth-child(2) { grid-area: s1; }
+        &:nth-child(3) { grid-area: s2; }
+        &:nth-child(4) { grid-area: s3; }
+        &:nth-child(5) { grid-area: s4; }
 
-            .stat-number {
-                font-size: 2rem;
-                font-weight: 800;
-                color: $accent;
-                letter-spacing: -0.04em;
-                line-height: 1;
-                margin-bottom: 0.35rem;
-            }
+        .stat-number {
+            font-size: 2.25rem;
+            font-weight: 800;
+            color: $accent;
+            letter-spacing: -0.04em;
+            line-height: 1;
+        }
 
-            .stat-label {
-                font-size: 0.8rem;
-                color: $text-muted;
-                font-weight: 500;
-            }
+        .stat-label {
+            font-size: 0.78rem;
+            color: $text-muted;
+            font-weight: 500;
         }
     }
 }
 
 // ── Responsive ────────────────────────────────────────────
 @media (max-width: $bp-md) {
-    #about {
-        .about-grid {
-            grid-template-columns: 1fr;
-            gap: 2.5rem;
-        }
+    #about .bento-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-areas:
+            "bio bio"
+            "s1  s2"
+            "s3  s4";
+    }
+}
+
+@media (max-width: $bp-sm) {
+    #about .bento-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "bio bio"
+            "s1  s2"
+            "s3  s4";
     }
 }

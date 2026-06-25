@@ -62,7 +62,7 @@
         }
 
         &.is-visible .skill-fill {
-            transform: scaleX(1);
+            transform: scaleX(var(--level, 1));
         }
     }
 }

@@ -4,6 +4,11 @@
     .projects-grid {
         display: grid;
         gap: 1.25rem;
+        grid-template-columns: repeat(2, 1fr);
+
+        @media (max-width: $bp-sm) {
+            grid-template-columns: 1fr;
+        }
     }
 
     // ── Card destacada (proyecto principal) ───────────────

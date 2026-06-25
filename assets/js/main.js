@@ -1,6 +1,31 @@
 // ── Constante del nav ─────────────────────────────────────
 const NAV_H = 72;
 
+// ── Spotlight cursor ──────────────────────────────────────
+const spotlight = document.querySelector('.spotlight');
+document.addEventListener('mousemove', (e) => {
+    spotlight.style.setProperty('--mx', `${e.clientX}px`);
+    spotlight.style.setProperty('--my', `${e.clientY}px`);
+}, { passive: true });
+
+// ── Typewriter hero subtitle ──────────────────────────────
+const heroSub = document.querySelector('.hero-sub[data-typewriter]');
+if (heroSub) {
+    const fullText = heroSub.dataset.typewriter;
+    heroSub.textContent = '';
+    heroSub.classList.add('is-typing');
+    let i = 0;
+    const type = () => {
+        if (i < fullText.length) {
+            heroSub.textContent += fullText[i++];
+            setTimeout(type, i < 15 ? 40 : 24);
+        } else {
+            heroSub.classList.remove('is-typing');
+        }
+    };
+    setTimeout(type, 1100);
+}
+
 // ── Scroll animations (IntersectionObserver) ─────────────
 const animObserver = new IntersectionObserver(
     (entries) => {
